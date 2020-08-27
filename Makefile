@@ -1,16 +1,16 @@
-board: game.o board.o
-	gcc game.o board.o `sdl2-config --libs --cflags` -Wall -lSDL2_image -lm -o game
+game : board.o game.o
+	gcc .\bin\game.o .\bin\board.o -o .\bin\prog -I include -L lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
-game.o: board.h
-	gcc game.c `sdl2-config --libs --cflags` -Wall -lSDL2_image -lm -c -o game.o
+game.o: .\src\board.h
+	gcc .\src\game.c -c -I include -L lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -o .\bin\game.o
 
 board.o:
-	gcc board.c -Wall -c -o board.o
+	gcc .\src\board.c -Wall -c -o .\bin\board.o
 
 .PHONY: clean mrproper
 
 clean:
-	rm -rf *.o
+	rm -rf .\bin\*.o
 
 mrproper:
 	rm -rf game
